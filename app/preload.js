@@ -1,11 +1,1 @@
-"use strict";
-const electron = require("electron");
-window.addEventListener("DOMContentLoaded", () => {
-  electron.contextBridge.exposeInMainWorld("ipcRenderer", {
-    send: (channel, data) => electron.ipcRenderer.send(channel, data),
-    on: (channel, callback) => {
-      const newCallback = (_, data) => callback(data);
-      electron.ipcRenderer.on(channel, newCallback);
-    }
-  });
-});
+"use strict";const r=require("electron");window.addEventListener("DOMContentLoaded",()=>{r.contextBridge.exposeInMainWorld("ipcRenderer",{send:(e,n)=>r.ipcRenderer.send(e,n),on:(e,n)=>{const d=(t,o)=>n(o);r.ipcRenderer.on(e,d)}})});

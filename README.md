@@ -42,8 +42,9 @@
 
 ### 下载/打包
 
-下载最新版本：[GitHub Release](https://github.com/xiaochen0517/chat-gpt-box/releases)
-
+下载最新版本：
+* [Window](http://192.168.32.60:3008/release/Chat-GPT-Client-v1.0.0-darwin-ia32-setup.exe)
+* [Macos](http://192.168.32.60:3008/release/Chat-GPT-Client-1.0.0-darwin.dmg)
 可下载已打包好的可执行文件，也可自行打包。
 
 ```shell
