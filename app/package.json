@@ -1,0 +1,79 @@
+{
+    "name": "chat-gpt-client",
+    "version": "1.0.0",
+    "main": "main.js",
+    "description": "学习chatgpt的一个小工具",
+    "scripts": {
+        "mac": "./node_modules/.bin/electron-builder --mac",
+        "win": "./node_modules/.bin/electron-builder --win",
+        "electron:dev": "pnpm --filter '@fitsadmin/main' electron:dev",
+        "electron:build": "pnpm --filter '@fitsadmin/main' electron:build && electron-builder --mac --win",
+        "electron:win": "pnpm --filter '@fitsadmin/main' electron:build && electron-builder --win",
+        "electron:mac": "pnpm --filter '@fitsadmin/main' electron:build && electron-builder --mac",
+        "electron:mac:dev": "electron-builder --mac",
+        "electron:mac1": "vite build --mode electron && electron-builder --mac && bash ./electron/resources/macNotary.sh",
+        "electron:icons": "./node_modules/.bin/electron-icon-builder --input=./assets/icon.png --output=./resources --flatten"
+    },
+    "devDependencies": {
+        "electron": "^26.5.0",
+        "electron-builder": "^24.6.4",
+        "electron-icon-builder": "2.0.1"
+    },
+    "build": {
+        "appId": "com.electron.chatGPT",
+        "productName": "Chat-GPT-Client",
+        "copyright": "Copyright © 2023-present fits",
+        "asar": true,
+        "files": [
+            "!**/assets",
+            "!**/electron",
+            {
+                "from": "../dist",
+                "to": "dist",
+                "filter": [
+                    "**/*",
+                    "!**/{.DS_Store}"
+                ]
+            }
+        ],
+        "directories": {
+            "output": "../release/${version}"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "perMachine": true,
+            "deleteAppDataOnUninstall": true,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "Chat-GPT-Client",
+            "language": "2052",
+            "installerIcon": "resources/icons/icon.ico",
+            "uninstallerIcon": "resources/icons/icon.ico"
+        },
+        "win": {
+            "icon": "resources/icons/icon.ico",
+            "artifactName": "${productName}-v${version}-${platform}-${arch}-setup.${ext}",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "ia32"
+                    ]
+                }
+            ]
+        },
+        "mac": {
+            "gatekeeperAssess": true,
+            "icon": "resources/icons/icon.icns",
+            "artifactName": "${productName}-v${version}-${platform}.${ext}"
+        },
+        "linux": {
+            "icon": "/resources/icons",
+            "artifactName": "${productName}-v${version}-${platform}-${arch}-setup.${ext}"
+        }
+    },
+    "repository": "https://github.com/caoguanjie/fitsadmin",
+    "author": "caoguanjie",
+    "license": "MIT"
+}
